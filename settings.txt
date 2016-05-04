@@ -1,0 +1,21 @@
+#Settings
+
+DeviceTotal: 1
+
+Device: 1
+Mode: Continuous
+Level: Low
+A-intensity: 30
+A-frequency: 50
+B-intensity: 20
+B-frequency: 50
+
+Device: 2
+Mode: Continuous
+Level: Low
+A-intensity: 30
+A-frequency: 50
+B-intensity: 20
+B-frequency: 50
+
+
