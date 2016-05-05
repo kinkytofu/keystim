@@ -1,0 +1,11 @@
+Short term:
+- Clean-up/make a lot of the code into functions
+- Make octave changes on the keyboard increase or decrease power accordingly
+- Make the keys produce sound on the raspberry pi
+- Allow for pre-programmed songs (as defined by config file?)
+- Allow "recording" of songs w/ estim, for playback
+
+Long term:
+- Make work with ET312 box
+
+
