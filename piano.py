@@ -49,7 +49,7 @@ d2BFreq = config.get('device2', 'b-frequency')
 
 
 """
-Convert settings
+Settings conversion
 """
 
 modes = {"pulse": 0, "bounce": 1, "continuous": 2, "a-split": 3, "b-split": 4, "wave": 5, "waterfall": 6, "squeeze": 7, "milk": 8, "throb": 9, "thrust": 10, "random": 11, "step": 12, "training": 13}
@@ -64,6 +64,17 @@ d2Levels = levels[d2Level.lower()]
 
 channels = {"AInt": "A", "BInt": "B", "AFreq": "C", "BFreq": "D"}
 
+lineEnd = "\\r"
+channelOff = "0"
+
+"""
+Not currently using the below variables because the performance hit is too great - there seem to be major delays when pressing the MIDI keys.
+"""
+
+d1AOn = "A%s%s" % (str(d1AInt), lineEnd)
+d1BOn = "B%s%s" % (str(d1BInt), lineEnd)
+d1AOff = "A%s%s" % (channelOff, lineEnd)
+d1BOff = "B%s%s" % (channelOff, lineEnd)
 
 
 """
@@ -118,10 +129,10 @@ else:
     pass
 
 if device2 == "connected" and d2Box == "2B":
-    ser2.write("M" + str(d1Modes) + "\\r")
+    ser2.write("M" + str(d2Modes) + "\\r")
     ser2.write(d1Levels + "\\r")
-    ser2.write("C" + str(d1AFreq) + "\\r")
-    ser2.write("D" + str(d1BFreq) + "\\r")
+    ser2.write("C" + str(d2AFreq) + "\\r")
+    ser2.write("D" + str(d2BFreq) + "\\r")
 else:
     pass
 
@@ -142,20 +153,17 @@ def MidiCallback(message, time_stamp):
         pass
 
     if note == 48 and keystate == "down":
-        ser1.write("A15\r")
+        ser1.write("A30\r")
+        print(d1AOn)
         sleep(1)
-    elif note == 48 and keystate == "up":
+    elif keystate == "up":
         ser1.write("A0\r")
-    elif note == 50 and keystate == "down":
-        ser1.write("A20\r")
-        sleep(1)
-    elif note == 50 and keystate == "up":
-        ser1.write("A0\r")
+        print(d1AOff)
     else:
         pass
 
-    print("keystate is " + keystate)
-    print("note is " + str(note))
+    print("keystate is %s " % (keystate))
+    print("note is %s" % (str(note)))
 
 
 """

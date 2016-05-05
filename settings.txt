@@ -12,7 +12,7 @@ b-frequency = 0|100
 [device1]
 on = yes
 box = 2B
-usb = 1 
+usb = 0 
 mode = continuous
 level = low
 a-intensity = 30
