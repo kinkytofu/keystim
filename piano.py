@@ -4,13 +4,36 @@ import rtmidi_python as rtmidi
 import time
 from time import sleep
 import serial
-
+from ConfigParser import SafeConfigParser
 
 """
-Opens and parses the external settings file.
+Opens the external config/settings file.
 """
-with open('settings.txt', 'r') as myfile:
-    data=myfile.read().replace('\n', '')
+config = SafeConfigParser()
+config.read('settings.txt')
+
+"""
+Settings for Device 1
+"""
+
+d1On = config.get('device1', 'on')
+d1Mode = config.get('device1', 'mode')
+d1Level = config.get('device1', 'level')
+d1AInt = config.get('device1', 'a-intensity')
+d1AFreq = config.get('device1', 'a-frequency')
+d1BInt = config.get('device1', 'b-intensity')
+d1BFreq = config.get('device1', 'b-frequency')
+
+"""
+Settings for Device 2
+"""
+d2On = config.get('device2', 'on')
+d2Mode = config.get('device2', 'mode')
+d2Level = config.get('device2', 'level')
+d2AInt = config.get('device2', 'a-intensity')
+d2AFreq = config.get('device2', 'a-frequency')
+d2BInt = config.get('device2', 'b-intensity')
+d2BFreq = config.get('device2', 'b-frequency')
 
 
 """
