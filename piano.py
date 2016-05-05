@@ -39,11 +39,36 @@ d2BFreq = config.get('device2', 'b-frequency')
 """
 Opens the correct serial port.
 """
-ser = serial.Serial(
-    port='/dev/ttyUSB0',
-    baudrate=9600,
-    timeout=0
-    )
+try:
+    if d1On == 'yes':
+        ser = serial.Serial(
+            port='/dev/ttyUSB0',
+            baudrate=9600,
+            timeout=0
+            )
+        print("Device 1 is connected to: " + ser.portstr)
+    elif d1On =='no':
+        print("Device 1 is not marked as 'on' in settings.txt")
+    else:
+        print("Device 1 'on' setting must be set to 'yes' or 'no'")
+except:
+    print("Device 1 is not connected")
+
+try:
+    if d2On == 'yes':
+        ser = serial.Serial(
+            port='/dev/ttyUSB1',
+            baudrate=9600,
+            timeout=0
+            )
+        print("Device 2 is connected to: " + ser.portstr)
+    elif d2On == 'no':
+        print("Device 2 is not marked as 'on' in settings.txt")
+    else:
+        print("Device 2 'on' setting must be set to 'yes' or 'no'")
+except SerialException:
+    print("Device 2 is not connected")
+
 
 """
 Need to check which ttyUSB# ports are connected, and then connect all present.
