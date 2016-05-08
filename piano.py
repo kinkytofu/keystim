@@ -64,11 +64,11 @@ d2Levels = levels[d2Level.lower()]
 
 channels = {"AInt": "A", "BInt": "B", "AFreq": "C", "BFreq": "D"}
 
-lineEnd = "\\r"
+lineEnd = "\r"
 channelOff = "0"
 
 """
-Not currently using the below variables because the performance hit is too great - there seem to be major delays when pressing the MIDI keys.
+Sets the on/off levels for the Channels, to be passed into the MIDICallback.
 """
 
 d1AOn = "A%s%s" % (str(d1AInt), lineEnd)
@@ -153,11 +153,11 @@ def MidiCallback(message, time_stamp):
         pass
 
     if note == 48 and keystate == "down":
-        ser1.write("A30\r")
+        ser1.write(d1AOn)
         print(d1AOn)
         sleep(1)
     elif keystate == "up":
-        ser1.write("A0\r")
+        ser1.write(d1AOff)
         print(d1AOff)
     else:
         pass
