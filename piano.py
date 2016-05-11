@@ -3,6 +3,7 @@
 try:
     from ConfigParser import SafeConfigParser
     import time
+    import os
     from time import sleep
     import rtmidi_python as rtmidi
     import serial
@@ -19,21 +20,27 @@ def serial_setup(port):
     print("Attempting to use port " + port + " (Device #" + str(PORT_COUNT) + ")")
 
     try:
-        ser = serial.Serial(
-            port=str(port),
-            baudrate=9600,
-            timeout=0
-        )
-        print("Connected Device " + str(PORT_COUNT) + " port: " + ser.portstr)
-
-        ser.write("M" + str(d1Modes) + "\\r")
-        ser.write(d1Levels + "\\r")
-        ser.write("C" + str(d1AFreq) + "\\r")
-        ser.write("D" + str(d1BFreq) + "\\r")
-
-    except:
-        print("Device " + str(PORT_COUNT) + " is not connected")
-        print("\n")
+        fp = open(port)
+    except IOError, errormsg:
+        print "Could not write to port %s: %s" % (port, errormsg)
+        raise
+    else:
+        try:
+            ser = serial.Serial(
+                port=str(port),
+                baudrate=9600,
+                timeout=0
+            )
+            print("Connected Device " + str(PORT_COUNT) + " port: " + ser.portstr)
+    
+            ser.write("M" + str(d1Modes) + "\\r")
+            ser.write(d1Levels + "\\r")
+            ser.write("C" + str(d1AFreq) + "\\r")
+            ser.write("D" + str(d1BFreq) + "\\r")
+    
+        except serial.SerialException:
+            print("Device " + str(PORT_COUNT) + " is not connected")
+            print("\n")
 
 def MidiCallback(message, time_stamp):
     messagetype = message[0] >> 4
