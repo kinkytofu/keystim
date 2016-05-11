@@ -19,7 +19,6 @@ This is currently only written to work with the E-stim Systems 2B.
 In the future, this should also work with the Erostek ET-312.
 """
 
-
 """
 Settings for Device 1
 """
