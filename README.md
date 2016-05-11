@@ -24,4 +24,6 @@ Support is not yet available, but planned.
 
 to be completed
 
+###Installation
 
+    pip install -r requirements.txt
