@@ -15,6 +15,7 @@ PORT_COUNT = 0
 def serial_setup(port):
     global PORT_COUNT
     PORT_COUNT += 1
+
     print("Attempting to use port " + port + " (Device #" + str(PORT_COUNT) + ")")
 
     try:
@@ -32,7 +33,7 @@ def serial_setup(port):
 
     except:
         print("Device " + str(PORT_COUNT) + " is not connected")
-
+        print("\n")
 
 def MidiCallback(message, time_stamp):
     messagetype = message[0] >> 4
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     '''
     Settings for Device 1
     '''
-    d1On = config.get('device1', 'on')
+    d1On = config.getboolean('device1', 'on')
     d1Box = config.get('device1', 'box')
     d1Port = config.get('device1', 'port')
     d1Mode = config.get('device1', 'mode')
@@ -82,7 +83,7 @@ if __name__ == "__main__":
     '''
     Settings for Device 2
     '''
-    d2On = config.get('device2', 'on')
+    d2On = config.getboolean('device2', 'on')
     d2Box = config.get('device2', 'box')
     d2Port = config.get('device2', 'port')
     d2Mode = config.get('device2', 'mode')

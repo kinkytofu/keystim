@@ -10,7 +10,7 @@ b-intensity = 0|100
 b-frequency = 0|100
 
 [device1]
-on = yes
+on = True
 box = 2B
 port = /dev/ttyUSB0
 mode = continuous
@@ -21,7 +21,7 @@ b-intensity = 20
 b-frequency = 50
 
 [device2]
-on = no
+on = False
 box = 2B
 port = /dev/ttyUSB2
 mode = continuous
